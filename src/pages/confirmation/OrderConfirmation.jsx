@@ -20,7 +20,6 @@ const OrderConfirmation = ({ setOrderPhase }) => {
       .catch((error) => setError(true));
   }, []);
 
-  // @ts-ignore
   if (error) return <AlertBanner />;
 
   const handleClick = () => {

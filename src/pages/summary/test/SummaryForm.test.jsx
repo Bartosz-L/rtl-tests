@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import SummaryForm from '../SummaryForm';
 
 describe('Summary form', () => {
-  beforeEach(() => render(<SummaryForm />));
+  beforeEach(() => render(<SummaryForm setOrderPhase={jest.fn()} />));
 
   it('checks initial condition', () => {
     const checkbox = screen.getByRole('checkbox', {
@@ -39,7 +39,7 @@ describe('Summary form', () => {
 });
 
 describe('popover tests', () => {
-  beforeEach(() => render(<SummaryForm />));
+  beforeEach(() => render(<SummaryForm setOrderPhase={jest.fn()} />));
 
   it('should respond to hover', async () => {
     // popover starts out hidden and

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
 
-test.skip('Order phases for happy path', async () => {
+test('Order phases for happy path', async () => {
   // render app
   // Don't need to wrap in provider; already wrapped!
   render(<App />);
@@ -86,10 +86,11 @@ test.skip('Order phases for happy path', async () => {
   userEvent.click(newOrderButton);
 
   // check that scoops and toppings have been reset
-  const scoopsTotal = screen.getByText('Scoops total: $0.00');
-  expect(scoopsTotal).toBeInTheDocument();
-  const toppingsTotal = screen.getByText('Toppings total: $0.00');
-  expect(toppingsTotal).toBeInTheDocument();
+
+  const scoopsTotal2 = await screen.findByText('Scoops total: $0.00');
+  const toppingsTotal2 = await screen.findByText('Toppings total: $0.00');
+  expect(scoopsTotal2).toBeInTheDocument();
+  expect(toppingsTotal2).toBeInTheDocument();
 
   // wait for items to appear so that Testing Library doesn't get angry about stuff
   // happening after test is over

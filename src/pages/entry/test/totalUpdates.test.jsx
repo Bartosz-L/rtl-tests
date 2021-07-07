@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 import Options from '../Options';
 import OrderEntry from '../OrderEntry';
 
-it('updates scoop subtotal when scoops change', async () => {
+test('update scoop subtotal when scoops change', async () => {
   render(<Options optionType='scoops' />);
 
-  // make sure total start out $0.00
+  // make sure total starts out $0.00
   const scoopsSubtotal = screen.getByText('Scoops total: $', { exact: false });
   expect(scoopsSubtotal).toHaveTextContent('0.00');
 
@@ -14,31 +14,25 @@ it('updates scoop subtotal when scoops change', async () => {
   const vanillaInput = await screen.findByRole('spinbutton', {
     name: 'Vanilla',
   });
-
-  userEvent.click(vanillaInput);
+  userEvent.clear(vanillaInput);
   userEvent.type(vanillaInput, '1');
-
   expect(scoopsSubtotal).toHaveTextContent('2.00');
 
   // update chocolate scoops to 2 and check subtotal
-
   const chocolateInput = await screen.findByRole('spinbutton', {
     name: 'Chocolate',
   });
-
-  userEvent.click(chocolateInput);
+  userEvent.clear(chocolateInput);
   userEvent.type(chocolateInput, '2');
-
   expect(scoopsSubtotal).toHaveTextContent('6.00');
 });
 
-it('should update topping subtotal when toppings change', async () => {
+test('update toppings subtotal when toppings change', async () => {
+  // render parent component
   render(<Options optionType='toppings' />);
 
-  // make sure total start out at $0.00
-  const toppingsTotal = screen.getByText('Toppings total: $', {
-    exact: false,
-  });
+  // make sure total starts out at $0.00
+  const toppingsTotal = screen.getByText('Toppings total: $', { exact: false });
   expect(toppingsTotal).toHaveTextContent('0.00');
 
   // add cherries and check subtotal
@@ -48,15 +42,13 @@ it('should update topping subtotal when toppings change', async () => {
   userEvent.click(cherriesCheckbox);
   expect(toppingsTotal).toHaveTextContent('1.50');
 
-  // add a hot fudge and check subtotal
-  const hotFugeCheckbox = screen.getByRole('checkbox', {
-    name: 'Hot fudge',
-  });
-  userEvent.click(hotFugeCheckbox);
+  // add hot fudge and check subtotal
+  const hotFudgeCheckbox = screen.getByRole('checkbox', { name: 'Hot fudge' });
+  userEvent.click(hotFudgeCheckbox);
   expect(toppingsTotal).toHaveTextContent('3.00');
 
   // remove hot fudge and check subtotal
-  userEvent.click(hotFugeCheckbox);
+  userEvent.click(hotFudgeCheckbox);
   expect(toppingsTotal).toHaveTextContent('1.50');
 });
 

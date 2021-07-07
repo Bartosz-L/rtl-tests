@@ -25,7 +25,7 @@ test('Order phases for happy path', async () => {
 
   // find and click order summary button
   const orderSummaryButton = screen.getByRole('button', {
-    name: /order sundae/i,
+    name: /order ice cream/i,
   });
   userEvent.click(orderSummaryButton);
 
@@ -115,7 +115,7 @@ test('Toppings header is not on summary page if no toppings ordered', async () =
 
   // find and click order summary button
   const orderSummaryButton = screen.getByRole('button', {
-    name: /order sundae/i,
+    name: /order ice cream/i,
   });
   userEvent.click(orderSummaryButton);
 
